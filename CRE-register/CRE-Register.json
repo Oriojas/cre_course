@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "workflow": {
+    "name": "Register",
+    "description": "",
+    "created": true
+  },
+  "nodes": [
+    {
+      "id": "trg_1776731804670_0",
+      "type": "appNode",
+      "position": {
+        "x": -29.5,
+        "y": -85
+      },
+      "data": {
+        "kind": "trigger.cron",
+        "name": "En 5 munutos",
+        "description": "",
+        "scheduleType": "interval",
+        "intervalValue": 5,
+        "intervalUnit": "minutes",
+        "atHour": 9,
+        "atMinute": 0,
+        "daysOfWeek": [
+          1
+        ],
+        "dayOfMonth": 1,
+        "timezone": "UTC",
+        "cronExpression": "*/5 * * * *"
+      },
+      "width": 240,
+      "height": 103,
+      "selected": true,
+      "positionAbsolute": {
+        "x": -29.5,
+        "y": -85
+      },
+      "dragging": false
+    },
+    {
+      "id": "sc_1776732568951_1",
+      "type": "appNode",
+      "position": {
+        "x": 270.5,
+        "y": 195
+      },
+      "data": {
+        "kind": "smartContract",
+        "name": "RegisterUsingCRE.sol",
+        "description": "Smart Contract reference",
+        "contractName": "RegisterUsingCRE.sol",
+        "events": [],
+        "functions": [
+          "RegisterSet"
+        ]
+      },
+      "width": 240,
+      "height": 127
+    },
+    {
+      "id": "cap_1776732568951_2",
+      "type": "appNode",
+      "position": {
+        "x": 270.5,
+        "y": -85
+      },
+      "data": {
+        "kind": "cap.evmWrite",
+        "name": "RegisterSet",
+        "description": "",
+        "smartContractName": "RegisterUsingCRE.sol",
+        "functionName": "RegisterSet",
+        "contractAddress": "0x3e21E2C35B228bCdf22163D5567F6FAa0c9D93De",
+        "chainSelector": "ethereum-testnet-sepolia"
+      },
+      "width": 240,
+      "height": 147
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_1776732568952_3",
+      "source": "trg_1776731804670_0",
+      "target": "cap_1776732568951_2",
+      "type": "smoothstep",
+      "data": {
+        "kind": "callback"
+      },
+      "className": "edge edge--callback"
+    },
+    {
+      "id": "e_1776732568952_4",
+      "source": "cap_1776732568951_2",
+      "target": "sc_1776732568951_1",
+      "sourceHandle": "refSource",
+      "targetHandle": "refTarget",
+      "type": "straight",
+      "data": {
+        "kind": "ref"
+      },
+      "className": "edge edge--ref"
+    }
+  ],
+  "selectedId": "cap_1776732568951_2",
+  "idCounter": 5
+}
